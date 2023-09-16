@@ -16,10 +16,10 @@ export async function update_loggedin() {
           var a = await Moralis.Web3API.token.getNFTOwners({
               chain: window.CHAIN_ID,
               address: window.NFT_CONTRACT_ADDRESS,
-              disableTotal: false
+              // disableTotal: false
           }), t = [];
           console.log(a);
-          for (var o = 0; o < a.total; o++)
+          for (var o = 0; o < a.page_size; o++)
               try {
                   (n = a.result[o])["token_uri"] || await Moralis.Web3API.token.reSyncMetadata({
                       chain: window.CHAIN,
@@ -37,7 +37,7 @@ export async function update_loggedin() {
           console.log(t);
           var i = await get_values(t);
           console.log(i); //jQuery("#puzzleDiv").html("");
-          for (o = 0; o < a.total; o++){
+          for (o = 0; o < a.page_size; o++){
               console.log("Iteration:", o)
               try {
                 var n = a.result[o]
